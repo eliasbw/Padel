@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Team</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'teams/style.css' %}">
+    <style>
+        /* Additional Custom Styles */
+
+
+
+    </style>
+</head>
+<body>
+<h1>Create Team</h1>
+<form method="post">
+    {% csrf_token %}
+    <h2>Team name</h2>
+    <label for="{{ team_form.name.id_for_label }}"></label>
+    {{ team_form.name }}
+    <h2>Player 1</h2>
+    <label for="{{ player_form1.name.id_for_label }}"></label>
+    {{ player_form1.name }}
+    <h2>Player 2</h2>
+    <label for="{{ player_form2.name.id_for_label }}"></label>
+    {{ player_form2.name }}
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

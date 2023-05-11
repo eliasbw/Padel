@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Teams</title>
+      {% load static %}
+    <link rel="stylesheet" href="{% static 'teams/style.css' %}">
+  </head>
+  <body>
+    <h1>All Teams</h1>
+    <ul>
+      {% for team in teams %}
+        <li>{{ team.name }}:
+            {% for player in players %}
+                {% if player.team == team %}
+                    {{ player.name }}
+                {% endif %}
+            {% endfor %}
+        </li>
+      {% empty %}
+        <li>No teams found.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
