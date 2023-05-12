@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Teams</title>
-      {% load static %}
+    {% load static %}
     <link rel="stylesheet" href="{% static 'teams/style.css' %}">
-  </head>
-  <body>
-    <h1>All Teams</h1>
+    <style>
+        .team-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .main-div {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto; /* Add this line to center the div horizontally */
+            padding: 20px; /* Optional: Add padding to create some spacing */
+        }
+        .team-item-delete {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>All Teams</h1>
+<div class="main-div">
     <ul>
-      {% for team in teams %}
-        <li>{{ team.name }}:
-            {% for player in players %}
-                {% if player.team == team %}
-                    {{ player.name }}
-                {% endif %}
-            {% endfor %}
-        </li>
-      {% empty %}
-        <li>No teams found.</li>
-      {% endfor %}
+        {% for team in teams %}
+            <li class="team-item">
+                {{ team.name }}:
+                {% for player in players %}
+                    {% if player.team == team %}
+                        {{ player.name     }}
+                    {% endif %}
+                {% endfor %}
+                <form action="{% url 'delete_team' team.id %}" method="post" class="team-item-delete">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No teams found.</li>
+        {% endfor %}
     </ul>
-  </body>
+</div>
+</body>
 </html>

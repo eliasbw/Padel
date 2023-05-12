@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Team, Player
 from .forms import TeamForm, PlayerForm
 from django.shortcuts import render, redirect
@@ -39,3 +39,9 @@ def create_team(request):
         player_form2 = PlayerForm(prefix='player2')
     return render(request, '../Templates/teams/create_team.html',
                   {'team_form': team_form, 'player_form1': player_form1, 'player_form2': player_form2})
+
+
+def delete_team(request, team_id):
+    team = get_object_or_404(Team, id=team_id)
+    team.delete()
+    return redirect('all_teams')
